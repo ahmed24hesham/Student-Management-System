@@ -96,4 +96,10 @@ for(int i=0;i<FullName.length();i++){
 }
 return true;
 }
+  public String lineRepresentation(){
+      String a=String.valueOf(Age);
+      String g=String.valueOf(GPA);
+      String i=String.valueOf(StudentID);
+          return i+","+FullName+"," +a+","+Gender+","+Department+","+g;
+        }
 }
