@@ -21,6 +21,11 @@ private ArrayList<Student>Students=new ArrayList<>();
             System.out.println("File not found: " );
         }
     }
+
+    public ArrayList<Student> getStudents() {
+        return Students;
+    }
+ 
      public Student createRecordFrom(String line) {
         String[] parts = line.split(",");
         return new Student(Integer.parseInt(parts[0].trim()),parts[1].trim(),Integer.parseInt(parts[2].trim()),parts[3].trim(),parts[4].trim(),Double.parseDouble(parts[5].trim()));
