@@ -94,6 +94,22 @@ for(int i=0;i<Students.size();i++){
 }
 return null;
 }
+public void update(int idOld,int idNew,String n,int age,double gpa) throws FileNotFoundException{
+ for(int i=0;i<Students.size();i++){
+   if(Students.get(i).getStudentID()==idOld){
+       if(9000<=idNew&&idNew<10000&&!contains(idNew))
+      Students.get(i).setStudentID(idNew);
+             else{
+         idNew=Student.getRandomNumber(9000,10000);
+          Students.get(i).setStudentID(idNew);
+     }
+      Students.get(i).setFullName(n);
+      Students.get(i).setAge(age);
+      Students.get(i).setGPA(gpa);
+       saveToFile();
+}
+ }
+}
 public void saveToFile() throws FileNotFoundException{
 PrintWriter pr = new PrintWriter("student.txt");
  for (int i = 0; i < Students.size(); i++) {

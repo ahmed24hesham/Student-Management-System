@@ -21,6 +21,8 @@ public class main {
         sd.add(mm);
         sd.add(ll);
 sd.readFromFile();
+sd.update(9006,9029,"Youssef",28,3.99);
+sd.update(9029,9030,"Youssef",28,3.99);
         sd.Display();
 //             System.out.println(kk.getStudentID());
 ////        sd.delete(kk.getStudentID());
