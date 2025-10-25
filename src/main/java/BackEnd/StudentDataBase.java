@@ -60,16 +60,16 @@ public void Display() throws FileNotFoundException{
    saveToFile();
 for(Student i:Students) System.out.println(i.getFullName());
 }
-public void delete(int key) throws FileNotFoundException{
+public boolean delete(int key) throws FileNotFoundException{
     for(int i=0;i<Students.size();i++){
    if(Students.get(i).getStudentID()==key){
        Students.remove(Students.get(i));
        saveToFile();
-       return;
+       return true;
    }
        }
     System.out.println("The id does not exist!!");
-    
+    return false;
 }
 public static boolean isDigit(String s) {
         for (char i:s.toCharArray()) {

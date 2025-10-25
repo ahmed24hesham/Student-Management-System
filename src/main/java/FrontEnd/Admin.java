@@ -4,6 +4,8 @@
  */
 package FrontEnd;
 
+import java.awt.CardLayout;
+
 /**
  *
  * @author Dell
@@ -13,8 +15,10 @@ public class Admin extends javax.swing.JPanel {
     /**
      * Creates new form Admin
      */
-    public Admin() {
+    private javax.swing.JPanel mainPanel;
+    public Admin(javax.swing.JPanel mainPanel) {
         initComponents();
+        this.mainPanel=mainPanel;
     }
 
     /**
@@ -115,18 +119,23 @@ public class Admin extends javax.swing.JPanel {
     String ad_pass="012";
     if(enteredUsername.equals(ad_username)&&enteredPassword.equals(ad_pass)){
     javax.swing.JOptionPane.showMessageDialog(this,"Login successful!");
+    
+                CardLayout cl = (CardLayout)(mainPanel.getLayout());
+            cl.show(mainPanel, "home"); // show DeletePanel
+    
+    
 // Home home = new Home();
 //    home.setVisible(true);
 // this.dispose();
-javax.swing.JFrame homeFrame = new javax.swing.JFrame("Home");
-    homeFrame.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
-    homeFrame.setSize(600, 400);
-    homeFrame.setLocationRelativeTo(null);
-    Home homePanel = new Home();
-    homeFrame.setContentPane(homePanel);
-    homeFrame.setVisible(true);
-    homeFrame.setResizable(false);
-    this.dispose();
+//javax.swing.JFrame homeFrame = new javax.swing.JFrame("Home");
+//    homeFrame.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
+//    homeFrame.setSize(600, 400);
+//    homeFrame.setLocationRelativeTo(null);
+//    Home homePanel = new Home();
+//    homeFrame.setContentPane(homePanel);
+//    homeFrame.setVisible(true);
+//    homeFrame.setResizable(false);
+//    this.dispose();
     }
     else{
           javax.swing.JOptionPane.showMessageDialog(this,"Invalid username or Pass");
@@ -145,7 +154,7 @@ javax.swing.JFrame homeFrame = new javax.swing.JFrame("Home");
     private javax.swing.JTextField usernametext;
     // End of variables declaration//GEN-END:variables
 
-    private void dispose() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+//    private void dispose() {
+//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+//    }
 }
