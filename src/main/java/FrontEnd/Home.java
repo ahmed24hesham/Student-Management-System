@@ -137,10 +137,14 @@ public class Home extends javax.swing.JPanel {
 
     private void Add_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Add_btnActionPerformed
         // TODO add your handling code here:
+        CardLayout cl = (CardLayout)(mainPanel.getLayout());
+            cl.show(mainPanel, "add");
     }//GEN-LAST:event_Add_btnActionPerformed
 
     private void ViewbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewbtnActionPerformed
         // TODO add your handling code here:
+        CardLayout cl = (CardLayout)(mainPanel.getLayout());
+            cl.show(mainPanel, "view");
     }//GEN-LAST:event_ViewbtnActionPerformed
 
     private void updatebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatebtnActionPerformed
