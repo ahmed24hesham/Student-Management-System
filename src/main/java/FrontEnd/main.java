@@ -21,10 +21,14 @@ public class main extends javax.swing.JFrame {
         initComponents();
         mainPanel.setLayout(new CardLayout());
         Home homePanel = new Home(mainPanel);
+        Add addPanel =new Add();
+        View viewPanel = new View();
         Delete deletePanel = new Delete();
         Admin admin = new Admin(mainPanel);
         SearchAndUpdate update = new SearchAndUpdate();
         mainPanel.add(homePanel, "home");
+        mainPanel.add(addPanel, "add");
+        mainPanel.add(viewPanel, "view");
         mainPanel.add(deletePanel, "delete");
         mainPanel.add(update, "update");
         mainPanel.add(admin,"admin");
@@ -36,6 +40,7 @@ this.setLocationRelativeTo(null);
 setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 setResizable(false);
 deletePanel.initData();
+viewPanel.initData();
     }
 
     /**
