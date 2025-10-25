@@ -28,7 +28,7 @@ private String Department;
      else{
      System.out.println("Age is't True"); 
      }
-     if(Gender=="Male"||Gender=="Female"){
+     if("Male".equals(Gender) || "Female".equals(Gender)){
        this.Gender=Gender;  
      }
      else{

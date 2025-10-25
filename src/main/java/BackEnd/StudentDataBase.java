@@ -1,11 +1,30 @@
 package BackEnd;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class StudentDataBase {
 private ArrayList<Student>Students=new ArrayList<>();
+ public void readFromFile() {
+        Students.clear();
+        try (Scanner input = new Scanner(new File("student.txt"))) {
+            while (input.hasNextLine()) {
+                String line = input.nextLine().trim();
+                if (!line.isEmpty()) {
+                    Students.add(createRecordFrom(line));
+                }
+            }
+        } catch (FileNotFoundException ex) {
+            System.out.println("File not found: " );
+        }
+    }
+     public Student createRecordFrom(String line) {
+        String[] parts = line.split(",");
+        return new Student(Integer.parseInt(parts[0].trim()),parts[1].trim(),Integer.parseInt(parts[2].trim()),parts[3].trim(),parts[4].trim(),Double.parseDouble(parts[5].trim()));
+    }  
 public boolean contains(int key){
     if(Students==null) return false;
       for(int i=0;i<Students.size();i++){
