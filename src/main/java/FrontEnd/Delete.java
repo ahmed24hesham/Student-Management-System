@@ -28,13 +28,6 @@ public class Delete extends javax.swing.JPanel {
         
     }
 public void initData() {
-    // load data into table, reset fields, etc.
-//            Student kk=new Student(9006,"Ahmed Elsa",25,"Male","lol",4);
-//            Student mm=new Student(9008,"Ahmed Hassan Farag",21,"Male","lol",2);
-//            Student ll=new Student(9003,"Ahmed Atas",21,"Male","lol",3);
-//            b.add(kk);
-//            b.add(mm);
-//            b.add(ll);
 b.readFromFile();
 model = (DefaultTableModel) jTable1.getModel();
 model.setColumnIdentifiers(new String[]{"Student ID", "Full Name", "Age","GPA"});
@@ -130,10 +123,13 @@ for (Student s : b.getStudents()) {
             );
             int studentID = (int) jTable1.getValueAt(selectedRow, 0);
 
-            boolean deleted = b.delete(studentID);
+           boolean deleted ;
 
             if (confirm != JOptionPane.YES_OPTION) {
                 return;
+            }
+            else {
+                 deleted = b.delete(studentID);
             }
             if (deleted) {
                 DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
