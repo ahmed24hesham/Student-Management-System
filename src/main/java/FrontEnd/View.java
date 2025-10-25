@@ -20,14 +20,25 @@ public class View extends javax.swing.JPanel {
      private DefaultTableModel model;
     StudentDataBase b = new StudentDataBase();
     
-    public void initData() throws FileNotFoundException {
-//     load data into table, reset fields, etc.
-            Student kk=new Student(9006,"Ahmed Elsa",25,"Male","lol",4);
-            Student mm=new Student(9008,"Ahmed Hassan Farag",21,"Male","lol",2);
-            Student ll=new Student(9003,"Ahmed Atas",21,"Male","lol",3);
-            b.add(kk);
-            b.add(mm);
-            b.add(ll);
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(main.class.getName());
+    
+    /**
+     * Creates new form View
+     */
+    
+    public View() {
+        initComponents();
+    }
+
+    
+    public void initData() {
+////     load data into table, reset fields, etc.
+//            Student kk=new Student();
+//            Student mm=new Student();
+//            Student ll=new Student();
+//            b.add(kk);
+//            b.add(mm);
+//            b.add(ll);
 
 b.readFromFile();
 model = (DefaultTableModel) jTable1.getModel();
@@ -43,13 +54,7 @@ for (Student s : b.getStudents()) {
         s.getGPA()});
 }
 }
-    /**
-     * Creates new form View
-     */
-    public View() {
-        initComponents();
-    }
-
+    
     
      private void loadTable(ArrayList<Student> students) {
         model.setRowCount(0); // clear previous rows
@@ -80,13 +85,13 @@ for (Student s : b.getStudents()) {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
