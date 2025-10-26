@@ -5,6 +5,7 @@
 package FrontEnd;
 import BackEnd.Student;
 import BackEnd.StudentDataBase;
+import java.awt.CardLayout;
 import java.awt.event.WindowAdapter;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -18,7 +19,8 @@ import javax.swing.table.DefaultTableModel;
 public class View extends javax.swing.JPanel {
 
      private DefaultTableModel model;
-    StudentDataBase b = new StudentDataBase();
+    private StudentDataBase b ;
+    private javax.swing.JPanel mainPanel;
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(main.class.getName());
     
@@ -26,22 +28,17 @@ public class View extends javax.swing.JPanel {
      * Creates new form View
      */
     
-    public View() {
+    public View(javax.swing.JPanel mainPanel, StudentDataBase db) {
         initComponents();
+        this.mainPanel = mainPanel;
+        this.b = db;
+        initData();
     }
 
     
     public void initData() {
-////     load data into table, reset fields, etc.
-//            Student kk=new Student();
-//            Student mm=new Student();
-//            Student ll=new Student();
-//            b.add(kk);
-//            b.add(mm);
-//            b.add(ll);
-
 b.readFromFile();
-model = (DefaultTableModel) jTable1.getModel();
+ model = (DefaultTableModel) jTable1.getModel();
 model.setColumnIdentifiers(new String[]{"Student ID", "Full Name", "Age","Gender","Major","GPA"});
 model.setRowCount(0);
 for (Student s : b.getStudents()) {
@@ -68,6 +65,7 @@ for (Student s : b.getStudents()) {
                 s.getGPA()
             });
         }
+        model.fireTableDataChanged();
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -82,6 +80,7 @@ for (Student s : b.getStudents()) {
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        Homebtn = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -110,17 +109,30 @@ for (Student s : b.getStudents()) {
             }
         });
 
+        Homebtn.setText("Home");
+        Homebtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HomebtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(20, 20, 20))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(20, 20, 20))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(84, 84, 84)
+                        .addComponent(Homebtn)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,6 +144,8 @@ for (Student s : b.getStudents()) {
                 .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
+                .addGap(66, 66, 66)
+                .addComponent(Homebtn)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -148,8 +162,15 @@ for (Student s : b.getStudents()) {
         loadTable(b.getStudents());
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void HomebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HomebtnActionPerformed
+        // TODO add your handling code here:
+        CardLayout cl = (CardLayout)(mainPanel.getLayout());
+        cl.show(mainPanel, "home");
+    }//GEN-LAST:event_HomebtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Homebtn;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;

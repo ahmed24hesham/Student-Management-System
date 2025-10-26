@@ -4,30 +4,37 @@
  */
 package FrontEnd;
 
-import BackEnd.Student;
-import BackEnd.StudentDataBase;
+import BackEnd.*;
+
+import java.awt.CardLayout;
 import java.awt.event.WindowAdapter;
 import java.io.FileNotFoundException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author Asus
  */
 public class Delete extends javax.swing.JPanel {
+    private javax.swing.JPanel mainPanel;
+    private StudentDataBase b ;
     private DefaultTableModel model;
-    StudentDataBase b = new StudentDataBase();
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(main.class.getName());
     /**
      * Creates new form Delete
      */
-    public Delete() {
+    public Delete(javax.swing.JPanel mainPanel, StudentDataBase db) {
         initComponents();
+        this.mainPanel = mainPanel;
+        this.b = db;
+        loadTable(); 
         
     }
-public void initData() {
+public void loadTable() {
 b.readFromFile();
 model = (DefaultTableModel) jTable1.getModel();
 model.setColumnIdentifiers(new String[]{"Student ID", "Full Name", "Age","GPA"});
@@ -50,6 +57,7 @@ for (Student s : b.getStudents()) {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        Homebtn = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -71,6 +79,13 @@ for (Student s : b.getStudents()) {
             }
         });
 
+        Homebtn.setText("Home");
+        Homebtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HomebtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout deletePanelLayout = new javax.swing.GroupLayout(deletePanel);
         deletePanel.setLayout(deletePanelLayout);
         deletePanelLayout.setHorizontalGroup(
@@ -78,7 +93,9 @@ for (Student s : b.getStudents()) {
             .addGroup(deletePanelLayout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addGroup(deletePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(Homebtn, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(47, 47, 47))
         );
         deletePanelLayout.setVerticalGroup(
@@ -89,6 +106,8 @@ for (Student s : b.getStudents()) {
             .addGroup(deletePanelLayout.createSequentialGroup()
                 .addGap(185, 185, 185)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(53, 53, 53)
+                .addComponent(Homebtn)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -108,43 +127,43 @@ for (Student s : b.getStudents()) {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-           try {
-            // TODO add your handling code here:
-            int selectedRow = jTable1.getSelectedRow();
-            if (selectedRow == -1) {
-                JOptionPane.showMessageDialog(this, "Please select a row to delete");
-                return;
-            }
-            int confirm = JOptionPane.showConfirmDialog(
-                this,
-                "Are you sure you want to delete this student?",
-                "Confirm Delete",
-                JOptionPane.YES_NO_OPTION
-            );
-            int studentID = (int) jTable1.getValueAt(selectedRow, 0);
+      int selectedRow = jTable1.getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Please select a row to delete");
+            return;
+        }
 
-           boolean deleted ;
+        int confirm = JOptionPane.showConfirmDialog(
+            this, "Are you sure you want to delete this student?", "Confirm Delete", JOptionPane.YES_NO_OPTION);
+        if (confirm != JOptionPane.YES_OPTION) return;
 
-            if (confirm != JOptionPane.YES_OPTION) {
-                return;
-            }
-            else {
-                 deleted = b.delete(studentID);
-            }
-            if (deleted) {
-                DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-                model.removeRow(selectedRow);
-                JOptionPane.showMessageDialog(this, "Student deleted successfully!");
-            } else {
-                JOptionPane.showMessageDialog(this, "Error: student not found in file.");
-            }   } catch (FileNotFoundException ex) {
-                System.getLogger(main.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
-            }
+        int studentID = (int) jTable1.getValueAt(selectedRow, 0);
+        boolean deleted = false;
+        try {
+            deleted = b.delete(studentID); // ✅ shared DB delete
+            b.saveToFile();               // ✅ save changes
+        } catch (FileNotFoundException ex) {
+            JOptionPane.showMessageDialog(this, "File not found.");
+        }
+
+        if (deleted) {
+            model.removeRow(selectedRow);
+            JOptionPane.showMessageDialog(this, "Student deleted successfully!");
+        } else {
+            JOptionPane.showMessageDialog(this, "Error: student not found.");
+        }
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void HomebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HomebtnActionPerformed
+        // TODO add your handling code here:
+        CardLayout cl = (CardLayout)(mainPanel.getLayout());
+        cl.show(mainPanel, "home");
+    }//GEN-LAST:event_HomebtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Homebtn;
     private javax.swing.JPanel deletePanel;
     private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;

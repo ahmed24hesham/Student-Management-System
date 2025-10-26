@@ -5,6 +5,7 @@
 package FrontEnd;
 import BackEnd.Student;
 import BackEnd.StudentDataBase;
+import java.awt.CardLayout;
 import java.awt.event.WindowAdapter;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -18,14 +19,16 @@ import javax.swing.table.DefaultTableModel;
  * @author Asus
  */
 public class Add extends javax.swing.JPanel {
-    StudentDataBase b = new StudentDataBase();
+    private StudentDataBase b;        // ✅ remove "new" here
+    private javax.swing.JPanel mainPanel;
 
     /**
      * Creates new form Add
      */
-    public Add() {
+    public Add(javax.swing.JPanel mainPanel, StudentDataBase db) {
         initComponents();
-        b.readFromFile();
+        this.mainPanel = mainPanel;
+        this.b = db;
     }
 
     /**
@@ -50,6 +53,7 @@ public class Add extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        homebtn = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(137, 207, 240));
 
@@ -108,33 +112,41 @@ public class Add extends javax.swing.JPanel {
 
         jLabel6.setText("GPA");
 
+        homebtn.setText("Home");
+        homebtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                homebtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(324, 324, 324)
+                .addComponent(btnAdd)
+                .addContainerGap(372, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(63, 63, 63)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(324, 324, 324)
-                        .addComponent(btnAdd))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(63, 63, 63)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6))
-                        .addGap(63, 63, 63)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtID, javax.swing.GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE)
-                            .addComponent(txtName)
-                            .addComponent(txtAge)
-                            .addComponent(txtGender)
-                            .addComponent(txtMajor)
-                            .addComponent(txtGPA))))
-                .addContainerGap(229, Short.MAX_VALUE))
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6))
+                .addGap(63, 63, 63)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtID, javax.swing.GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE)
+                    .addComponent(txtName)
+                    .addComponent(txtAge)
+                    .addComponent(txtGender)
+                    .addComponent(txtMajor)
+                    .addComponent(txtGPA))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(homebtn)
+                .addGap(51, 51, 51))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -154,8 +166,9 @@ public class Add extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtGender, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addGap(24, 24, 24)
+                    .addComponent(jLabel4)
+                    .addComponent(homebtn))
+                .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtMajor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
@@ -195,7 +208,7 @@ try {
 
         // Success message
         JOptionPane.showMessageDialog(this, "Student added successfully!");
-
+        b.saveToFile();
         // Clear input fields
         txtID.setText("");
         txtName.setText("");
@@ -236,9 +249,18 @@ try {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtMajorActionPerformed
 
+    private void homebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homebtnActionPerformed
+        // TODO add your handling code here:
+          
+         CardLayout cl = (CardLayout) (mainPanel.getLayout());
+        cl.show(mainPanel, "home");
+
+    }//GEN-LAST:event_homebtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
+    private javax.swing.JButton homebtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

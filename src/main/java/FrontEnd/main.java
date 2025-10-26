@@ -3,15 +3,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package FrontEnd;
+import BackEnd.StudentDataBase;
 import java.awt.CardLayout;
 import javax.swing.JFrame;
-
 /**
  *
  * @author Asus
  */
 public class main extends javax.swing.JFrame {
-    
+     private StudentDataBase database;  // ✅ shared instance
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(main.class.getName());
 
     /**
@@ -19,13 +19,17 @@ public class main extends javax.swing.JFrame {
      */
     public main() {
         initComponents();
+        database = new StudentDataBase();
+        database.readFromFile();
         mainPanel.setLayout(new CardLayout());
+        
         Home homePanel = new Home(mainPanel);
-        Add addPanel =new Add();
-        View viewPanel = new View();
-        Delete deletePanel = new Delete();
+        Add addPanel =new Add(mainPanel,database);
+        View viewPanel = new View(mainPanel,database);
+        Delete deletePanel = new Delete(mainPanel,database);
         Admin admin = new Admin(mainPanel);
-        SearchAndUpdate update = new SearchAndUpdate();
+        SearchAndUpdate update = new SearchAndUpdate(mainPanel,database);
+        
         mainPanel.add(homePanel, "home");
         mainPanel.add(addPanel, "add");
         mainPanel.add(viewPanel, "view");
@@ -34,13 +38,14 @@ public class main extends javax.swing.JFrame {
         mainPanel.add(admin,"admin");
 //        mainPanel.add(homePanel, "home");
 //        mainPanel.add(homePanel, "home");
-            CardLayout cl = (CardLayout)(mainPanel.getLayout());
+     CardLayout cl = (CardLayout)(mainPanel.getLayout());
     cl.show(mainPanel, "admin"); // start with login;
 this.setLocationRelativeTo(null);
 setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 setResizable(false);
-deletePanel.initData();
-viewPanel.initData();
+
+//deletePanel.initData();
+//viewPanel.initData();
     }
 
     /**
@@ -103,6 +108,16 @@ viewPanel.initData();
         //</editor-fold>
 
         /* Create and display the form */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
+            logger.log(java.util.logging.Level.SEVERE, null, ex);
+        }
         java.awt.EventQueue.invokeLater(() -> new main().setVisible(true));
     }
 

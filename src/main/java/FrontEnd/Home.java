@@ -5,6 +5,8 @@
 package FrontEnd;
 
 import java.awt.CardLayout;
+import java.util.Arrays;
+import javax.swing.JPanel;
 
 /**
  *
@@ -16,11 +18,11 @@ public class Home extends javax.swing.JPanel {
      * Creates new form Home
      */
     private javax.swing.JPanel mainPanel;
-    public Home(javax.swing.JPanel mainPanel) {
+    
+    public Home(JPanel mainPanel) {
        initComponents();
        this.mainPanel = mainPanel;
-       Delete deletePanel = new Delete();
-       SearchAndUpdate update = new SearchAndUpdate();
+       this.mainPanel = mainPanel;
     }
 
     /**
@@ -143,8 +145,12 @@ public class Home extends javax.swing.JPanel {
 
     private void ViewbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewbtnActionPerformed
         // TODO add your handling code here:
-        CardLayout cl = (CardLayout)(mainPanel.getLayout());
-            cl.show(mainPanel, "view");
+        CardLayout cl = (CardLayout) mainPanel.getLayout();
+View viewPanel = (View) Arrays.stream(mainPanel.getComponents())
+    .filter(c -> c instanceof View)
+    .findFirst().orElse(null);
+if (viewPanel != null) viewPanel.initData();
+cl.show(mainPanel, "view");
     }//GEN-LAST:event_ViewbtnActionPerformed
 
     private void updatebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatebtnActionPerformed

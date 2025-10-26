@@ -17,19 +17,21 @@ import javax.swing.table.TableRowSorter;
  * @author Asus
  */
 public class SearchAndUpdate extends javax.swing.JPanel {
-        private DefaultTableModel model;
-    StudentDataBase b = new StudentDataBase();
+    private javax.swing.JPanel mainPanel;
+    private StudentDataBase b;
+    private DefaultTableModel model;
     private int iD;
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(main.class.getName());
     /**
      * Creates new form Update
      */
-    public SearchAndUpdate() {
+    public SearchAndUpdate(javax.swing.JPanel mainPanel, StudentDataBase b) {
         initComponents();
-         initData();
+         this.mainPanel = mainPanel;
+        this.b = b;
+        initData();
     }
     public void initData() {
-b.readFromFile();
+    b.readFromFile();
 model = (DefaultTableModel) jTable1.getModel();
 model.setColumnIdentifiers(new String[]{"Student ID", "Full Name", "Age","GPA"});
 model.setRowCount(0);
@@ -66,6 +68,7 @@ for (Student s : b.getStudents()) {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        Homebtn = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -112,6 +115,13 @@ for (Student s : b.getStudents()) {
             }
         });
 
+        Homebtn.setText("Home");
+        Homebtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HomebtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -149,7 +159,9 @@ for (Student s : b.getStudents()) {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(140, 140, 140)
-                        .addComponent(jButton1))
+                        .addComponent(jButton1)
+                        .addGap(18, 18, 18)
+                        .addComponent(Homebtn))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(212, Short.MAX_VALUE))
         );
@@ -160,7 +172,8 @@ for (Student s : b.getStudents()) {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
-                    .addComponent(jButton1))
+                    .addComponent(jButton1)
+                    .addComponent(Homebtn))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(41, 41, 41)
@@ -223,7 +236,7 @@ for (Student s : b.getStudents()) {
        int viewRow = jTable1.getSelectedRow();
     if (viewRow >= 0) {
         int modelRow = jTable1.convertRowIndexToModel(viewRow); // 👈 convert to actual data index
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+         model = (DefaultTableModel) jTable1.getModel();
         iD=Integer.parseInt(model.getValueAt(modelRow, 0).toString());
         ID.setText(model.getValueAt(modelRow, 0).toString());
         Name.setText(model.getValueAt(modelRow, 1).toString());
@@ -240,7 +253,7 @@ for (Student s : b.getStudents()) {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 int viewRow = jTable1.getSelectedRow();
-    DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+     model = (DefaultTableModel) jTable1.getModel();
 
     if (viewRow >= 0) {
         int modelRow = jTable1.convertRowIndexToModel(viewRow);
@@ -286,6 +299,12 @@ double gpa = Double.parseDouble(GPA.getText());
     }
 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void HomebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HomebtnActionPerformed
+        // TODO add your handling code here:
+         java.awt.CardLayout cl = (java.awt.CardLayout)(mainPanel.getLayout());
+        cl.show(mainPanel, "home");
+    }//GEN-LAST:event_HomebtnActionPerformed
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -293,6 +312,7 @@ double gpa = Double.parseDouble(GPA.getText());
     private javax.swing.JTextField Dep;
     private javax.swing.JTextField GPA;
     private javax.swing.JTextField Gender;
+    private javax.swing.JButton Homebtn;
     private javax.swing.JTextField ID;
     private javax.swing.JTextField Name;
     private javax.swing.JButton jButton1;
