@@ -97,7 +97,7 @@ return null;
 public void update(int idOld,int idNew,String n,int age,double gpa) throws FileNotFoundException{
  for(int i=0;i<Students.size();i++){
    if(Students.get(i).getStudentID()==idOld){
-       if(9000<=idNew&&idNew<10000&&!contains(idNew))
+       if(9000<=idNew&&idNew<10000)
       Students.get(i).setStudentID(idNew);
              else{
          idNew=Student.getRandomNumber(9000,10000);
