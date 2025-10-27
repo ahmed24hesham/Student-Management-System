@@ -36,16 +36,13 @@ public class main extends javax.swing.JFrame {
         mainPanel.add(deletePanel, "delete");
         mainPanel.add(update, "update");
         mainPanel.add(admin,"admin");
-//        mainPanel.add(homePanel, "home");
-//        mainPanel.add(homePanel, "home");
+
      CardLayout cl = (CardLayout)(mainPanel.getLayout());
     cl.show(mainPanel, "admin"); // start with login;
 this.setLocationRelativeTo(null);
 setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 setResizable(false);
 
-//deletePanel.initData();
-//viewPanel.initData();
     }
 
     /**
@@ -80,7 +77,7 @@ setResizable(false);
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -90,7 +87,6 @@ setResizable(false);
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
@@ -107,7 +103,6 @@ setResizable(false);
         }
         //</editor-fold>
 
-        /* Create and display the form */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {

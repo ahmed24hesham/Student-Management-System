@@ -20,6 +20,7 @@ private String Department;
      }
      else{
          System.out.println("Something Wrong in FullName"); 
+         this.setStudentID(0);
      }
      
      if(Age>0){
@@ -27,12 +28,14 @@ private String Department;
      }
      else{
      System.out.println("Age is't True"); 
+     this.setStudentID(0);
      }
      if("Male".equals(Gender) || "Female".equals(Gender)){
        this.Gender=Gender;  
      }
      else{
       System.out.println("Gender is't True");
+      this.setStudentID(0);
      }
      this.Department=Department;
      if(0<=GPA&&GPA<=4){
@@ -40,6 +43,7 @@ private String Department;
      }
      else{
       System.out.println("GPA is't True");
+      this.setStudentID(0);
      }
  } 
     public int getStudentID() {

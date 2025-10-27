@@ -41,6 +41,9 @@ public boolean contains(int key){
 public void add(Student s) throws FileNotFoundException{
     if(contains(s.getStudentID()))
         System.out.println("The id already exist!!");
+    else if (s.getStudentID()==0){
+        System.out.println("invalid input");
+    }
     else Students.add(s);
     saveToFile();
 }

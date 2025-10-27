@@ -3,4 +3,8 @@
 9555,EL Said EL badawy,67,Female,lol,2.0
 9664,Ahmd,69,Male,lol,4.0
 9665,hamo El Nigger,96,Female,lol,4.0
-9999,malak hesham,12,null,k,1.0
+9722,Ahmed,20,Male,compu,4.0
+9522,Ahmed,20,Male,compu,3.0
+9233,Ali Ahmed,23,Male,compu,4.0
+9887,gamal,21,Male,compu,2.4
+9834,medhat,25,Male,compu,3.0
